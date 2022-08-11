@@ -14,7 +14,7 @@ class SubWayScreen extends StatefulWidget {
 class _SubWayScreenState extends State<SubWayScreen> {
   final _textController = TextEditingController();
 
-  final _debouncer = Debouncer(milliseconds: 500);
+  final _debounce = Debounce(milliseconds: 500);
 
   @override
   void dispose() {
@@ -37,7 +37,7 @@ class _SubWayScreenState extends State<SubWayScreen> {
               padding: const EdgeInsets.fromLTRB(5, 15, 5, 10),
               child: TextField(
                 controller: _textController,
-                onChanged: _debouncer.run(() => setState(() {
+                onChanged: _debounce.run(() => setState(() {
                       viewModel.fetchArrivalLists(_textController.text);
                     })),
                 decoration: InputDecoration(
