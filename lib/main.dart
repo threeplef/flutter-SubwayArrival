@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:seoul_subway/ui/subway_screen.dart';
+import 'package:seoul_subway/view_model/subway_screen_view_model.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (_) => SubwayScreenViewModel(),
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
