@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seoul_subway/debounce.dart';
 import 'package:seoul_subway/model/subway_arrival.dart';
 import 'package:seoul_subway/view_model/subway_screen_view_model.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,8 @@ class SubWayScreen extends StatefulWidget {
 
 class _SubWayScreenState extends State<SubWayScreen> {
   final _textController = TextEditingController();
+
+  final _debouncer = Debouncer(milliseconds: 500);
 
   @override
   void dispose() {
@@ -34,6 +37,9 @@ class _SubWayScreenState extends State<SubWayScreen> {
               padding: const EdgeInsets.fromLTRB(5, 15, 5, 10),
               child: TextField(
                 controller: _textController,
+                onChanged: _debouncer.run(() => setState(() {
+                      viewModel.fetchArrivalLists(_textController.text);
+                    })),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -46,18 +52,9 @@ class _SubWayScreenState extends State<SubWayScreen> {
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        viewModel.fetchArrivalLists(_textController.text);
-                        _textController.clear();
-                      });
-                    },
-                    child: const Icon(Icons.search),
-                  ),
                   hintText: '검색',
-                  hintStyle:
-                  const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  hintStyle: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.bold),
                   contentPadding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
                   filled: true,
                   fillColor: Theme.of(context).colorScheme.surfaceVariant,
@@ -66,7 +63,8 @@ class _SubWayScreenState extends State<SubWayScreen> {
             ),
             Expanded(
               child: ListView(
-                children: viewModel.arrivalList.map((SubwayArrival arrivalList) {
+                children:
+                    viewModel.arrivalList.map((SubwayArrival arrivalList) {
                   return Column(
                     children: [
                       Text(arrivalList.trainLineNm),
