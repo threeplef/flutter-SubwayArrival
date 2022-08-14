@@ -28,13 +28,13 @@ class _SubWayScreenState extends State<SubWayScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('서울 지하철 실시간 도착정보'),
+        title: const Center(child: Text('서울 지하철 실시간 도착정보')),
       ),
       body: SafeArea(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(5, 15, 5, 10),
+              padding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
               child: TextField(
                 controller: _textController,
                 onChanged: _debounce.run(() => setState(() {
@@ -52,9 +52,9 @@ class _SubWayScreenState extends State<SubWayScreen> {
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
-                  hintText: '검색',
+                  hintText: '🚆  지하철 역 검색',
                   hintStyle: const TextStyle(
-                      fontSize: 14, fontWeight: FontWeight.bold),
+                      fontSize: 16, fontWeight: FontWeight.bold),
                   contentPadding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
                   filled: true,
                   fillColor: Theme.of(context).colorScheme.surfaceVariant,
@@ -67,8 +67,12 @@ class _SubWayScreenState extends State<SubWayScreen> {
                     viewModel.arrivalList.map((SubwayArrival arrivalList) {
                   return Column(
                     children: [
-                      Text(arrivalList.trainLineNm),
-                      Text(arrivalList.arvlMsg2),
+                      Text('[ ${arrivalList.statnNm} (${arrivalList.updnLine}) ]', style: const TextStyle(fontSize: 16)),
+                      Text(arrivalList.trainLineNm, style: const TextStyle(fontSize: 15)),
+                      const SizedBox(height: 5),
+                      Text(arrivalList.arvlMsg2, style: const TextStyle(fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 5),
+                      Text('🚇 ${arrivalList.arvlMsg3}'),
                       const Divider(),
                     ],
                   );
