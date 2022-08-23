@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:seoul_subway/model/subway_arrival.dart';
+import 'package:seoul_subway/data/model/subway_arrival.dart';
 
 class SubwayApi {
   SubwayApi() {

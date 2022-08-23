@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:seoul_subway/data/model/subway_arrival.dart';
+import 'package:seoul_subway/data/repository/subway_screen_repository.dart';
 import 'package:seoul_subway/debounce.dart';
-import 'package:seoul_subway/model/subway_arrival.dart';
-import 'package:seoul_subway/view_model/subway_screen_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SubWayScreen extends StatefulWidget {

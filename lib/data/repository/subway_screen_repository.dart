@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:seoul_subway/api/subway_api.dart';
-import 'package:seoul_subway/model/subway_arrival.dart';
+import 'package:seoul_subway/data/model/subway_arrival.dart';
+import 'package:seoul_subway/data/source/subway_source.dart';
 
 class SubwayScreenViewModel extends ChangeNotifier {
   final _subwayApi = SubwayApi();
