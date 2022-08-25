@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:seoul_subway/data/repository/subway_screen_repository.dart';
+import 'package:seoul_subway/ui/subway_screen_view_model.dart';
 import 'package:seoul_subway/ui/subway_screen.dart';
 
 void main() {

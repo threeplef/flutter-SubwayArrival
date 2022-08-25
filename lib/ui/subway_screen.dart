@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seoul_subway/data/model/subway.dart';
-import 'package:seoul_subway/data/repository/subway_screen_repository.dart';
+import 'package:seoul_subway/ui/subway_screen_view_model.dart';
 import 'package:seoul_subway/debounce.dart';
 import 'package:provider/provider.dart';
 
@@ -63,20 +62,23 @@ class _SubWayScreenState extends State<SubWayScreen> {
             ),
             Expanded(
               child: ListView(
-                children:
-                    viewModel.arrivalList.map((Subway arrivalList) {
-                  return Column(
+                children: [
+                  Column(
                     children: [
-                      Text('[ ${arrivalList.statnNm} (${arrivalList.updnLine}) ]', style: const TextStyle(fontSize: 16)),
-                      Text(arrivalList.trainLineNm, style: const TextStyle(fontSize: 15)),
+                      Text(
+                          '[ ${viewModel.arrivalList.statnNm} (${viewModel.arrivalList.updnLine}) ]',
+                          style: const TextStyle(fontSize: 16)),
+                      Text(viewModel.arrivalList.trainLineNm,
+                          style: const TextStyle(fontSize: 15)),
                       const SizedBox(height: 5),
-                      Text(arrivalList.arvlMsg2, style: const TextStyle(fontWeight: FontWeight.bold)),
+                      Text(viewModel.arrivalList.arvlMsg2,
+                          style: const TextStyle(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 5),
-                      Text('🚇 ${arrivalList.arvlMsg3}'),
+                      Text('🚇 ${viewModel.arrivalList.arvlMsg3}'),
                       const Divider(),
                     ],
-                  );
-                }).toList(),
+                  ),
+                ],
               ),
             ),
           ],
