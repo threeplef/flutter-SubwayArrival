@@ -16,8 +16,8 @@ class SubwayApiImpl implements SubwayApi {
         'http://swopenapi.seoul.go.kr/api/subway/sample/json/realtimeStationArrival/0/5/$query');
     http.Response response = await _client.get(url);
 
-    String jsonString = response.body;
-    Map<String, dynamic> json = jsonDecode(jsonString);
+    String jsonData = utf8.decode(response.bodyBytes);
+    Map<String, dynamic> json = jsonDecode(jsonData);
     return SubwayDto.fromJson(json);
   }
 }

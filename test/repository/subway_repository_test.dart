@@ -21,6 +21,6 @@ void main() {
 
     final subway = await repository.getList('영등포');
 
-    expect(subway.statnNm, '영등포');
+    expect(subway.elementAt(0).statnNm, '영등포');
   });
 }

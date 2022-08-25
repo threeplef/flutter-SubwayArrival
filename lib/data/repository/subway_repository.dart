@@ -1,4 +1,5 @@
 import 'package:seoul_subway/data/model/subway.dart';
+import 'package:seoul_subway/data/model/subway_dto.dart';
 import 'package:seoul_subway/data/source/subway_api.dart';
 
 class SubwayRepository {
@@ -6,15 +7,20 @@ class SubwayRepository {
 
   SubwayRepository(this._api);
 
-  Future<Subway> getList(String query) async {
+  Future<List<Subway>> getList(String query) async {
     final subwayDto = await _api.getList(query);
 
-    return Subway(
-      updnLine: subwayDto.realtimeArrivalList?.elementAt(0).updnLine ?? '',
-      trainLineNm: subwayDto.realtimeArrivalList?.elementAt(0).trainLineNm?? '',
-      statnNm: subwayDto.realtimeArrivalList?.elementAt(0).statnNm?? '',
-      arvlMsg2: subwayDto.realtimeArrivalList?.elementAt(0).arvlMsg2?? '',
-      arvlMsg3: subwayDto.realtimeArrivalList?.elementAt(0).arvlMsg3 ?? '',
-    );
+    if ((subwayDto.realtimeArrivalList?.length ?? 0) == 0) {
+      return [];
+    }
+    return subwayDto.realtimeArrivalList!
+        .map((RealtimeArrivalList e) => Subway(
+              updnLine: e.updnLine ?? '',
+              trainLineNm: e.trainLineNm ?? '',
+              statnNm: e.statnNm ?? '',
+              arvlMsg2: e.arvlMsg2 ?? '',
+              arvlMsg3: e.arvlMsg3 ?? '',
+            ))
+        .toList();
   }
 }

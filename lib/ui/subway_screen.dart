@@ -62,23 +62,23 @@ class _SubWayScreenState extends State<SubWayScreen> {
             ),
             Expanded(
               child: ListView(
-                children: [
-                  Column(
+                children: viewModel.arrivalList.map((e) {
+                  return Column(
                     children: [
                       Text(
-                          '[ ${viewModel.arrivalList.statnNm} (${viewModel.arrivalList.updnLine}) ]',
+                          '[ ${e.statnNm} (${e.updnLine}) ]',
                           style: const TextStyle(fontSize: 16)),
-                      Text(viewModel.arrivalList.trainLineNm,
+                      Text(e.trainLineNm,
                           style: const TextStyle(fontSize: 15)),
                       const SizedBox(height: 5),
-                      Text(viewModel.arrivalList.arvlMsg2,
+                      Text(e.arvlMsg2,
                           style: const TextStyle(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 5),
-                      Text('🚇 ${viewModel.arrivalList.arvlMsg3}'),
+                      Text('🚇 ${e.arvlMsg3}'),
                       const Divider(),
                     ],
-                  ),
-                ],
+                  );
+                }).toList(),
               ),
             ),
           ],
