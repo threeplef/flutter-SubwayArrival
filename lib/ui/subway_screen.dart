@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seoul_subway/data/model/subway_arrival.dart';
+import 'package:seoul_subway/data/model/subway.dart';
 import 'package:seoul_subway/data/repository/subway_screen_repository.dart';
 import 'package:seoul_subway/debounce.dart';
 import 'package:provider/provider.dart';
@@ -64,7 +64,7 @@ class _SubWayScreenState extends State<SubWayScreen> {
             Expanded(
               child: ListView(
                 children:
-                    viewModel.arrivalList.map((SubwayArrival arrivalList) {
+                    viewModel.arrivalList.map((Subway arrivalList) {
                   return Column(
                     children: [
                       Text('[ ${arrivalList.statnNm} (${arrivalList.updnLine}) ]', style: const TextStyle(fontSize: 16)),
